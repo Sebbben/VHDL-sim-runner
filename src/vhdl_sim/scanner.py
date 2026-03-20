@@ -47,6 +47,9 @@ def scan(root: Path) -> ScanResult:
             name = match.group(1).lower()
             if name not in entities:
                 entities[name] = Entity(name=name, source_file=vhd_file)
+                
+    for vhd_file in vhd_files:
+        text = vhd_file.read_text(encoding='utf-8', errors='ignore')
 
         for match in ARCH_RE.finditer(text):
             arch_name   = match.group(1).lower()
