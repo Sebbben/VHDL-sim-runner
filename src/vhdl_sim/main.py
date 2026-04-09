@@ -19,7 +19,9 @@ def save_selection(root: Path, selection):
         "architecture": selection.architecture.name,
         "testbench":    str(selection.testbench.resolve()),
     }
-    (root / LAST_RUN_FILE).write_text(json.dumps(data, indent=2))
+    sim_file = root / LAST_RUN_FILE
+    sim_file.parent.mkdir(parents=True, exist_ok=True)
+    sim_file.write_text(json.dumps(data, indent=2))
 
 
 def load_selection(root: Path, scan_result):
